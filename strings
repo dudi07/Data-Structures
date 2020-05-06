@@ -1,1 +1,183 @@
+#include<iostream>
+#include<stdio.h>
+int string_tolower(char s[10])
+{
+    int i = 0 ;
+    for(i = 0 ; s[i] !='\0' ; i++ )
+    {
+        s[i] = s[i] +32 ;
+    }
+    std::cout<< s ;
+    return 0 ;
+}
+void toggle(char S[10])
+{
+    int i = 0 ;
+    for ( i = 0; S[i] != '\0' ; i++)
+    {
+        if(S[i] >= 65 && S[i] <= 90 )
+        {
+            S[i] = S[i] +32 ;
+        }
+        if(S[i] >= 'a' && S[i] <=122)
+        {
+            S[i] = S[i] - 32 ;
+        }
+    }
+    
+}
+int vowels_consonent(char *A) 
+{
+    int i ;
+    int vcount = 0 ;
+    int wcount = 0 ;
+    int ccount = 0 ;
+    int scount = 0 ;
+    for(i = 0 ; A[i] != '\0' ; i++)
+    {
+    
+        if(A[i] == 'a'|| A[i] == 'i' || (A[i] == 'o' || A[i] == 'e' || A[i] == 'u' ))
+            vcount ++ ;
+        else if((A[i] >= 65 && A[i] <= 90) || (A[i] >= 97 && A[i] <= 122))
+            ccount++ ;
+        else 
+            wcount++ ; 
+        if(A[i] == ' ' && A[i-1] != ' ')
+        scount ++ ;
+
+    }
+    std::cout<<" the number of letters : " << ccount << '\n' <<" the number of vowels : " << vcount << '\n'<<"the number of words " << wcount <<'\n'<<"the number of spaces "<< scount <<'\n' ;    
+    return 0 ;
+}
+int valid(char *name)
+{
+    int i = 0 ;
+    for (i = 0 ; i < name[i] != '\0' ; i++)
+    {
+        if(!(name[i] >= 65 && name[i] <= 90)&& !(name[i] >= 97 && name[i] <= 122)&& !(name[i] >= 48 && name[i] <= 57))
+            return 0 ;
+        else
+        {
+            return 1 ;
+        }
+            
+    }
+    return 0 ;     
+}
+
+int palindrome_string(char A[])
+{
+    int i = 0 ;
+    int j = strlen(A) - 1 ;
+    for(i = 0 , j = strlen(A) -1 ; j>i ; i++ , j --  )
+    {
+        if(A[i] != A[j])
+        {
+            
+            std::cout<< "the string is not palindrome" ;
+            return 0 ;
+        }
+        
+    }
+    std::cout<<"the string is palindrome" ;
+    return 0 ;
+}
+int finding_duplicate(char A[])
+{
+    int D[10] ;
+    int j ;
+    
+    for(int i = 0 ; i < strlen(A) - 1 ; i++ )
+    {
+        if(A[i] != 0 )
+        {
+            for(j = i+1 ; j < strlen(A) -1 ; j++)
+            {
+                if(A[i] == A[j])
+                {
+                    std::cout<<"the given string have elements in duplicate \n" ;
+                    A[j] = 0 ;
+                    return 0 ;
+                    
+                }
+            }
+            
+        }
+    }
+    std::cout<<"the string does not have any element in duplicacy" ;
+    return 0 ;
+
+
+}
+int display(int A[] , int n  )
+{
+    int i = 0 ;
+    for(i = 0 ; i < n ; i++ )
+    {
+        std::cout<<A[i] <<'\n';
+    }
+    return 0 ;
+    
+}
+int number_duplicate(char A[])
+{
+    int H[25] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    int i ;
+
+    for(i = 0 ; i <strlen(A) ; i++)
+    {
+        H[A[i] - 97] ++ ;
+    }
+    display(H , 25) ;
+    return 0 ;
+} 
+int duplicacy_bitwise(char A[])
+{
+    long int x = 0 , H = 0 ;
+    int i = 0 ;
+    for(i = 0 ; A[i] != '\0' ; i++  )
+    {
+        x = 1 ;
+        x = x << (A[i] - 97) ;
+        if((x & H) > 0)
+        {
+            std::cout<< A[i]<<'\n' <<" is the duplicate element int the string \n" ;
+        } 
+        else
+            H = x| H ;       
+    }
+    
+    return 1 ;
+    
+}
+int Anagrams(char A[] , char B[])
+{
+    int  H[25] ={0} ;
+    int i = 0 ;
+    if(strlen(A) == strlen(B))
+    {
+        for(i = 0 ; A[i] != 0 ; i++)
+        {
+            H[A[i] - 97] ++ ;
+            H[B[i] - 97] -- ;
+
+        }
+    }
+    display(H , 25) ;
+    
+    return 0 ;
+}
+
+
+int main () 
+{   
+    //char s[] = "WeLCoMe" ;
+    //string_tolower(s) ;
+    //vowels_consonent(A) ;
+    //char *name = "Anil1!3" ;
+    char A[] = "decimall" ;
+    char B[] = "medicall" ;
+    Anagrams(A , B) ;
+    return 0 ;//and you can call any function present in the program acc. to yoiur requirement
+}
 
